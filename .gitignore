@@ -160,6 +160,6 @@ crashlytics-build.properties
 fabric.properties
 
 # user
-output/
+out_data/
 tmpl/
 tmpl.py
