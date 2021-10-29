@@ -5,3 +5,5 @@ USER_AGENT = ('Mozilla/5.0 (iPhone; CPU iPhone OS 14_7 like Mac OS X) '
               'Mobile/15E148 Safari/604.1')
 
 HEADERS = {'User-Agent': USER_AGENT}
+
+PRODUCT_LINKS_FILE = 'out_data/product_links.yaml'

@@ -58,3 +58,16 @@ def generate_page_links(url, count):
         page_links.append(f'{url}?page={page}')
 
     return page_links
+
+
+def get_product_links(page_links):
+    for url in page_links:
+        html_code = get_html(url)
+        soup = BeautifulSoup(html_code, 'html.parser')
+        category_tag = soup.find('div', {'class': 'row products_category'})
+        if category_tag:
+            product_tags = category_tag.find_all('div', {'class': 'product-layout'})
+            for product_tag in product_tags:
+                url_tag = product_tag.find('link', {'itemprop': 'url'})
+                href = url_tag.get('href')
+                yield href
