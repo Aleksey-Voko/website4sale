@@ -7,3 +7,4 @@ USER_AGENT = ('Mozilla/5.0 (iPhone; CPU iPhone OS 14_7 like Mac OS X) '
 HEADERS = {'User-Agent': USER_AGENT}
 
 PRODUCT_LINKS_FILE = 'out_data/product_links.yaml'
+PRODUCT_CARDS_FILE = 'out_data/product_cards.yaml'

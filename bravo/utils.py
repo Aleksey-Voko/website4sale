@@ -30,3 +30,10 @@ def add_in_yaml(data, out_file: str, encoding='utf-8', flow_style=True):
         if sep:
             f_out.write(sep)
         yaml.dump(data, f_out)
+
+
+def get_from_yaml(input_file: str, encoding='utf-8'):
+    yaml = YAML(pure=True)
+    with open(Path(input_file), encoding=encoding) as f_in:
+        for item in yaml.load_all(f_in):
+            yield item
