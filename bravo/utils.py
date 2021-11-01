@@ -1,4 +1,5 @@
 import json
+import logging
 from pathlib import Path
 
 import requests
@@ -46,3 +47,21 @@ def yaml_to_json(yaml_file, json_file, encoding='utf-8'):
     indent = ' ' * 4
     with open(json_file, 'w', encoding=encoding) as out_f:
         json.dump(card_list, out_f, ensure_ascii=False, indent=indent)
+
+
+def download_file(url, f_name):
+    logging.basicConfig(level=logging.INFO)
+
+    Path(f_name).parent.mkdir(parents=True, exist_ok=True)
+    while True:
+        try:
+            logging.info(f'\nFile: {Path(f_name).name}\n')
+            response = requests.get(url, headers=HEADERS)
+            logging.info(f'\nDownload file:\n{url}\n{"=" * 30}\n')
+            with open(Path(f_name), 'wb') as f_out:
+                f_out.write(response.content)
+            break
+        except Exception as e:
+            logging.warning(f'{"#" * 10} Exception {"#" * 10}')
+            logging.warning(f'{e}')
+            logging.warning(f'{"#" * 10} Exception {"#" * 10}\n')

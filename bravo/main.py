@@ -1,9 +1,10 @@
 from pathlib import Path
 
 from bravo.data import (BASE_URL, PRODUCT_LINKS_FILE, PRODUCT_CARDS_FILE,
-                        PRODUCT_CARDS_JSON_FILE)
+                        PRODUCT_CARDS_JSON_FILE, IMG_LINK_DICT)
 from bravo.parsing.catalog import (get_catalog_links, get_page_links,
                                    get_product_links)
+from bravo.parsing.images import save_img_link_dict, download_images
 from bravo.parsing.product_card import get_product_cards
 from bravo.utils import get_html, add_in_yaml, get_from_yaml, yaml_to_json
 
@@ -39,5 +40,13 @@ def main():
         add_in_yaml(product_card, PRODUCT_CARDS_FILE, flow_style=False)
         completed_links.append(product_card['link'])
 
-    print('### Конвертация в JSON...')
-    yaml_to_json(PRODUCT_CARDS_FILE, PRODUCT_CARDS_JSON_FILE)
+    if not Path(PRODUCT_CARDS_JSON_FILE).exists():
+        print('### Конвертация в JSON...')
+        yaml_to_json(PRODUCT_CARDS_FILE, PRODUCT_CARDS_JSON_FILE)
+
+    if not Path(IMG_LINK_DICT).exists():
+        print('### Словарь для фото...')
+        save_img_link_dict()
+
+    print('### Загрузка фото...')
+    download_images()
