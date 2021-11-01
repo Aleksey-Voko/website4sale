@@ -26,7 +26,7 @@ def main():
     else:
         completed_links = []
 
-    product_links = list(set(product_links) - set(completed_links))
+    product_links = sorted(list(set(product_links) - set(completed_links)))
 
     for product_card in get_product_cards(product_links):
         add_in_yaml(product_card, PRODUCT_CARDS_FILE, flow_style=False)
