@@ -9,3 +9,4 @@ HEADERS = {'User-Agent': USER_AGENT}
 
 PRODUCT_LINKS_FILE = 'out_data/product_links.yaml'
 PRODUCT_CARDS_FILE = 'out_data/product_cards.yaml'
+PRODUCT_CARDS_JSON_FILE = 'out_data/product_cards.json'

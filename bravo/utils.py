@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 
 import requests
@@ -38,3 +39,10 @@ def get_from_yaml(input_file: str, encoding='utf-8'):
     with open(Path(input_file), encoding=encoding) as f_in:
         for item in yaml.load_all(f_in):
             yield item
+
+
+def yaml_to_json(yaml_file, json_file, encoding='utf-8'):
+    card_list = list(get_from_yaml(yaml_file))
+    indent = ' ' * 4
+    with open(json_file, 'w', encoding=encoding) as out_f:
+        json.dump(card_list, out_f, ensure_ascii=False, indent=indent)

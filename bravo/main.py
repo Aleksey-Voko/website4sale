@@ -1,10 +1,11 @@
 from pathlib import Path
 
-from bravo.data import BASE_URL, PRODUCT_LINKS_FILE, PRODUCT_CARDS_FILE
+from bravo.data import (BASE_URL, PRODUCT_LINKS_FILE, PRODUCT_CARDS_FILE,
+                        PRODUCT_CARDS_JSON_FILE)
 from bravo.parsing.catalog import (get_catalog_links, get_page_links,
                                    get_product_links)
 from bravo.parsing.product_card import get_product_cards
-from bravo.utils import get_html, add_in_yaml, get_from_yaml
+from bravo.utils import get_html, add_in_yaml, get_from_yaml, yaml_to_json
 
 
 def main():
@@ -37,3 +38,6 @@ def main():
     for product_card in get_product_cards(product_links):
         add_in_yaml(product_card, PRODUCT_CARDS_FILE, flow_style=False)
         completed_links.append(product_card['link'])
+
+    print('### Конвертация в JSON...')
+    yaml_to_json(PRODUCT_CARDS_FILE, PRODUCT_CARDS_JSON_FILE)
