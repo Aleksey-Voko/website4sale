@@ -70,4 +70,7 @@ def get_product_links(page_links):
             for product_tag in product_tags:
                 url_tag = product_tag.find('link', {'itemprop': 'url'})
                 href = url_tag.get('href')
+                print(href)
                 yield href
+            print('=' * 30)
+            print()

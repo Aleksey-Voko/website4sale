@@ -9,8 +9,9 @@ from bravo.data import HEADERS
 def get_html(url):
     response = requests.get(url, headers=HEADERS)
     print(url)
-    print(response.status_code)
+    print(f'status code = {response.status_code}')
     print('=' * 30)
+    print()
     return response.text
 
 

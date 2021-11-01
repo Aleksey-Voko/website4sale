@@ -7,9 +7,13 @@ from bravo.data import HEADERS, PRODUCT_PREFIX_URL
 def get_product_cards(links):
     with requests.Session() as sess:
         for link in links:
+            print('#### Товар...')
+            print(link)
             product_card = get_product_card(link, sess)
             if product_card.keys():
                 yield product_card
+            print('=' * 100)
+            print()
 
 
 def get_product_card(link, sess: requests.sessions.Session) -> dict:
@@ -20,8 +24,8 @@ def get_product_card(link, sess: requests.sessions.Session) -> dict:
 
             response = sess.get(link, headers=HEADERS)
             if response.status_code == requests.codes.ok:
-                print(response.url, 'request ok', sep=' -> ')
                 print('status_code', str(response.status_code), sep=' -> ')
+                print()
 
                 html_code = response.text
                 soup = BeautifulSoup(html_code, 'html.parser')
@@ -110,6 +114,7 @@ def get_images(soup: BeautifulSoup) -> tuple:
     group_1_tag = soup.find('div', {'class': 'hpm-group hpm-group-1'})
     if group_1_tag:
         hpm_item_tags = group_1_tag.find_all('div', {'class': 'hpm-item'})
+        print('##### Get images...')
         for hpm_item_tag in hpm_item_tags:
             img = {'data-id': hpm_item_tag.get('data-id')}
 
@@ -125,6 +130,7 @@ def get_images(soup: BeautifulSoup) -> tuple:
             image = get_image(data_id[0])
             img['image'] = image
             images.append(img)
+        print()
 
     owl_images = []
 
@@ -253,6 +259,7 @@ def get_dimensions(soup: BeautifulSoup) -> list:
     dimensions = []
 
     group_0_tag = soup.find('div', {'class': 'hpm-group hpm-group-0'})
+    print('##### Get prices...')
     if group_0_tag:
         hpm_item_tags = group_0_tag.find_all('div', {'class': 'hpm-item'})
         if hpm_item_tags:
@@ -274,6 +281,7 @@ def get_dimensions(soup: BeautifulSoup) -> list:
             data_id = dim['data-id'].split(',')
             dim['prices'] = get_prices(data_id[0])
             dimensions.append(dim)
+    print()
 
     return dimensions
 
