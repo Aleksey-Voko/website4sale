@@ -1,6 +1,5 @@
 BASE_URL = 'https://door.website4sale.online/'
-PRODUCT_PREFIX_URL = ('https://door.website4sale.online/index.php'
-                      '?route=product/product&product_id=')
+PRODUCT_PREFIX_URL = f'{BASE_URL}index.php?route=product/product&product_id='
 
 USER_AGENT = ('Mozilla/5.0 (iPhone; CPU iPhone OS 14_7 like Mac OS X) '
               'AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/92.0.4515.90 '
